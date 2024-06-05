@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  auth_backend_21i1184:
+    build: ./Auth
+    container_name: auth_backend_21i1184
+    ports:
+      - "8412:8412"
+    depends_on:
+      - mongodb
+
+  classrooms_backend_21i1184:
+    build: ./Classrooms
+    container_name: Classrooms_backend_21i1184
+    ports:
+      - "8413:8413"
+    depends_on:
+      - mongodb
+
+  client_frontend_21i1184:
+    build: ./client
+    container_name: client_frontend_21i1184
+    ports:
+      - "8411:8411"
+
+  event-bus_backend_21i1184:
+    build: ./event-bus
+    container_name: event-bus_backend_21i1184
+    ports:
+      - "8414:8414"
+
+  post_backend_21i1184:
+    build: ./Post
+    container_name: post_backend_21i1184
+    ports:
+      - "8415:8415"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_backend_21i1184
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
